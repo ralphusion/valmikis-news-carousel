@@ -3,7 +3,7 @@ import React from 'react'
     export default function CategorySelector({ categories, currentCategory, onChange }) {
       return (
         <div className="bg-white/20 backdrop-blur-sm p-4 shadow-sm overflow-x-auto scrollbar-hide rounded-lg">
-          <div className="flex gap-2 justify-center">
+          <div className="flex gap-2 justify-start min-w-max">
             {categories.map((category) => (
               <button
                 key={category}

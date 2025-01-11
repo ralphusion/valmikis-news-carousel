@@ -77,10 +77,13 @@ import React, { useState, useEffect, useRef } from 'react'
         <div className="min-h-screen">
           <div className="fixed inset-0 -z-10">
             {currentImage && (
-              <div
-                className="w-full h-full bg-cover bg-center animate-zoom-in"
-                style={{ backgroundImage: `url(${currentImage})` }}
-              />
+              <>
+                <div
+                  className="w-full h-full bg-cover bg-center animate-zoom-in"
+                  style={{ backgroundImage: `url(${currentImage})` }}
+                />
+                <div className="absolute inset-0 bg-black/50" />
+              </>
             )}
           </div>
           <div className="max-w-2xl mx-auto h-screen flex flex-col p-4">
