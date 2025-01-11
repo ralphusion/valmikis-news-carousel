@@ -47,9 +47,9 @@ import React, { useState, useEffect, useRef } from 'react'
         return (
           <div className="flex-1 flex items-center justify-center">
             <div className="animate-pulse space-y-4">
-              <div className="h-6 bg-black/50 rounded w-48" />
-              <div className="h-4 bg-black/50 rounded w-64" />
-              <div className="h-4 bg-black/50 rounded w-56" />
+              <div className="h-6 bg-white/50 rounded w-48" />
+              <div className="h-4 bg-white/50 rounded w-64" />
+              <div className="h-4 bg-white/50 rounded w-56" />
             </div>
           </div>
         )
@@ -70,7 +70,7 @@ import React, { useState, useEffect, useRef } from 'react'
               </div>
             ))}
           </div>
-          <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2">
+          <div className="absolute bottom-12 left-0 right-0 flex justify-center gap-2">
             {items.map((_, index) => (
               <button
                 key={index}
@@ -79,7 +79,7 @@ import React, { useState, useEffect, useRef } from 'react'
                   onArticleChange(items[index]?.enclosure?.url)
                 }}
                 className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentIndex ? 'bg-white' : 'bg-white/50'
+                  index === currentIndex ? 'bg-purple-600' : 'bg-white/50'
                 }`}
               />
             ))}
