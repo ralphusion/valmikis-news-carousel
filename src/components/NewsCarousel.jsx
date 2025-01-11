@@ -39,9 +39,9 @@ import React, { useState, useEffect, useRef } from 'react'
         return (
           <div className="flex-1 flex items-center justify-center">
             <div className="animate-pulse space-y-4">
-              <div className="h-6 bg-white/80 rounded w-48" />
-              <div className="h-4 bg-white/80 rounded w-64" />
-              <div className="h-4 bg-white/80 rounded w-56" />
+              <div className="h-6 bg-black/50 rounded w-48" />
+              <div className="h-4 bg-black/50 rounded w-64" />
+              <div className="h-4 bg-black/50 rounded w-56" />
             </div>
           </div>
         )

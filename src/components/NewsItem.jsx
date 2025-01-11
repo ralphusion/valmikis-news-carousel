@@ -20,13 +20,13 @@ import React from 'react'
       }
 
       return (
-        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 h-full flex flex-col justify-between">
+        <div className="bg-black/50 backdrop-blur-sm rounded-xl p-6 h-full flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-2 leading-tight text-gray-900">
+            <h1 className="text-3xl font-bold mb-2 leading-tight text-white">
               {item.title}
             </h1>
-            <p className="text-sm text-gray-500 mb-4">{formattedDate}</p>
-            <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            <p className="text-sm text-white/80 mb-4">{formattedDate}</p>
+            <p className="text-white/90 text-lg leading-relaxed mb-6">
               {cleanContent(item.contentSnippet)}
             </p>
           </div>
@@ -36,7 +36,7 @@ import React from 'react'
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block w-full text-center px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                className="inline-block w-full text-center px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-200 transition-colors"
               >
                 Read More
               </a>

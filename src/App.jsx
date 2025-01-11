@@ -4,11 +4,11 @@ import React, { useState, useEffect, useRef } from 'react'
 
     const categories = {
       'Formula 1': 'https://www.motorsport.com/rss/f1/news/',
-      'Domestic News': 'https://www.thehindu.com/news/national/feeder/default.rss',
+      'Local': 'https://www.thehindu.com/news/national/feeder/default.rss',
       'Sports': 'https://www.espncricinfo.com/rss/content/story/feeds/6.xml',
-      'Finance': 'https://www.moneycontrol.com/rss/business.xml',
+      'Finance': 'https://www.livemint.com/rss/companies',
       'Lifestyle': 'https://www.indiatoday.in/rss/1206577',
-      'Movies': 'https://www.hindustantimes.com/feeds/rss/bollywood/rssfeed.xml'
+      'AI': 'https://www.livemint.com/rss/AI'
     }
 
     async function parseRSS(url) {
@@ -75,7 +75,7 @@ import React, { useState, useEffect, useRef } from 'react'
               />
             )}
           </div>
-          <div className="max-w-md mx-auto h-screen flex flex-col">
+          <div className="max-w-2xl mx-auto h-screen flex flex-col p-4">
             <CategorySelector 
               categories={categoryKeys} 
               currentCategory={currentCategory}
