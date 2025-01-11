@@ -20,13 +20,13 @@ import React from 'react'
       }
 
       return (
-        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 h-[80%] flex flex-col justify-between">
+        <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 h-[80%] flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-2 leading-tight text-gray-900">
+            <h1 className="text-3xl font-bold mb-2 leading-tight text-white">
               {item.title}
             </h1>
-            <p className="text-sm text-gray-700 mb-4">{formattedDate}</p>
-            <p className="text-gray-800 text-xl leading-relaxed mb-6">
+            <p className="text-sm text-white/80 mb-4">{formattedDate}</p>
+            <p className="text-white text-xl leading-relaxed mb-6">
               {cleanContent(item.contentSnippet)}
             </p>
           </div>
