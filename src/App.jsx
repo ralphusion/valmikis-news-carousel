@@ -51,7 +51,6 @@ function App() {
     }
     const newCategory = categoryKeys[categoryIndex.current]
     setCurrentCategory(newCategory)
-    // Reset carousel to first article
     if (carouselRef.current) {
       carouselRef.current.resetToFirstArticle()
     }
@@ -63,7 +62,6 @@ function App() {
       try {
         const items = await parseRSS(categories[currentCategory])
         setNewsItems(items.slice(0, 20))
-        // Show first article's image when category changes
         if (items[0]?.enclosure?.url) {
           setCurrentImage(items[0].enclosure.url)
         }
@@ -93,12 +91,14 @@ function App() {
           </>
         )}
       </div>
-      <div className="max-w-2xl mx-auto h-screen flex flex-col p-4">
-        <CategorySelector 
-          categories={categoryKeys} 
-          currentCategory={currentCategory}
-          onChange={setCurrentCategory}
-        />
+      <div className="max-w-4xl mx-auto h-screen flex flex-col p-4">
+        <div className="w-full">
+          <CategorySelector 
+            categories={categoryKeys} 
+            currentCategory={currentCategory}
+            onChange={setCurrentCategory}
+          />
+        </div>
         <NewsCarousel 
           ref={carouselRef}
           items={newsItems} 
