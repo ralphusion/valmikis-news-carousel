@@ -66,7 +66,7 @@ import React, { useState, useEffect, useRef } from 'react'
       }, [currentCategory])
 
       return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen">
           <div className="fixed inset-0 -z-10">
             {newsItems[0]?.enclosure?.url && (
               <div
