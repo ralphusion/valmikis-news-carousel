@@ -2,8 +2,8 @@ import React from 'react'
 
     export default function CategorySelector({ categories, currentCategory, onChange }) {
       return (
-        <div className="bg-white/80 backdrop-blur-sm p-4 shadow-sm">
-          <div className="flex overflow-x-auto gap-2">
+        <div className="bg-white/80 backdrop-blur-sm p-4 shadow-sm overflow-x-auto scrollbar-hide">
+          <div className="flex gap-2">
             {categories.map((category) => (
               <button
                 key={category}
