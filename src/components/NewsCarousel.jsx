@@ -1,10 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import NewsItem from './NewsItem'
 
-export default function NewsCarousel({ items, loading, interval, onSwipe, onArticleChange }) {
+const NewsCarousel = forwardRef(({ items, loading, interval, onSwipe, onArticleChange }, ref) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const touchStartX = useRef(0)
   const touchStartY = useRef(0)
+
+  // Expose reset function to parent
+  useImperativeHandle(ref, () => ({
+    resetToFirstArticle: () => {
+      setCurrentIndex(0)
+      if (items[0]?.enclosure?.url) {
+        onArticleChange(items[0].enclosure.url)
+      }
+    }
+  }))
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX
@@ -72,4 +82,6 @@ export default function NewsCarousel({ items, loading, interval, onSwipe, onArti
       </div>
     </div>
   )
-}
+})
+
+export default NewsCarousel
