@@ -56,17 +56,32 @@ export default function NewsCarousel({ items, loading, interval, onSwipe, onArti
   }
 
   return (
-    <div 
-      className="flex-1 relative overflow-hidden"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      <div className="absolute inset-0 transition-transform duration-500"
+    <div className="flex-1 relative overflow-hidden">
+      <div 
+        className="absolute inset-0 transition-transform duration-500"
         style={{ transform: `translateY(-${currentIndex * 100}%)` }}
       >
         {items.map((item, index) => (
-          <div key={index} className="h-full p-4">
-            <NewsItem item={item} />
+          <div key={index} className="h-full flex items-center p-4">
+            <div className="flex-1 h-full">
+              <NewsItem item={item} />
+            </div>
+            <div className="w-12 ml-4 flex items-center">
+              <div className="flex flex-col space-y-2 bg-black/20 backdrop-blur-sm p-2 rounded-lg">
+                {items.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setCurrentIndex(i)
+                      onArticleChange(items[i]?.enclosure?.url)
+                    }}
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      i === index ? 'bg-purple-600' : 'bg-white/50'
+                    } hover:bg-purple-400`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         ))}
       </div>
