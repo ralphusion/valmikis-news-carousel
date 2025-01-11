@@ -70,7 +70,7 @@ import React, { useState, useEffect, useRef } from 'react'
               </div>
             ))}
           </div>
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+          <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2">
             {items.map((_, index) => (
               <button
                 key={index}
