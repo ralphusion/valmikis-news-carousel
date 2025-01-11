@@ -10,30 +10,27 @@ import React from 'react'
         minute: '2-digit'
       })
 
-      // Clean and format the content snippet
       const cleanContent = (content) => {
         if (!content) return 'No content available...'
-        // Remove HTML tags and extra spaces
         const cleaned = content
           .replace(/<[^>]+>/g, '')
           .replace(/\s+/g, ' ')
           .trim()
-        // Return first 500 characters
         return cleaned.length > 500 ? cleaned.substring(0, 500) + '...' : cleaned
       }
 
       return (
         <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 h-full flex flex-col justify-between">
           <div>
-            <h1 className="text-2xl font-bold mb-4 leading-tight text-gray-900">
+            <h1 className="text-3xl font-bold mb-2 leading-tight text-gray-900">
               {item.title}
             </h1>
+            <p className="text-sm text-gray-500 mb-4">{formattedDate}</p>
             <p className="text-gray-700 text-lg leading-relaxed mb-6">
               {cleanContent(item.contentSnippet)}
             </p>
           </div>
           <div>
-            <p className="text-sm text-gray-500 mb-4">{formattedDate}</p>
             {item.link && (
               <a
                 href={item.link}

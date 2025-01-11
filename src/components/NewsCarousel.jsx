@@ -1,8 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
     import NewsItem from './NewsItem'
 
-    export default function NewsCarousel({ items, loading, interval }) {
+    export default function NewsCarousel({ items, loading, interval, onSwipe }) {
       const [currentIndex, setCurrentIndex] = useState(0)
+      const touchStartX = useRef(0)
+      const touchStartY = useRef(0)
+
+      const handleTouchStart = (e) => {
+        touchStartX.current = e.touches[0].clientX
+        touchStartY.current = e.touches[0].clientY
+      }
+
+      const handleTouchEnd = (e) => {
+        const touchEndX = e.changedTouches[0].clientX
+        const touchEndY = e.changedTouches[0].clientY
+        const deltaX = touchEndX - touchStartX.current
+        const deltaY = touchEndY - touchStartY.current
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX > 50) onSwipe('right')
+          if (deltaX < -50) onSwipe('left')
+        } else {
+          if (deltaY > 50) setCurrentIndex((prev) => Math.max(prev - 1, 0))
+          if (deltaY < -50) setCurrentIndex((prev) => Math.min(prev + 1, items.length - 1))
+        }
+      }
 
       useEffect(() => {
         if (items.length > 1) {
@@ -26,7 +48,11 @@ import React, { useState, useEffect } from 'react'
       }
 
       return (
-        <div className="flex-1 relative overflow-hidden">
+        <div 
+          className="flex-1 relative overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="absolute inset-0 transition-transform duration-500"
             style={{ transform: `translateY(-${currentIndex * 100}%)` }}
           >

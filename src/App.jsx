@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
     import CategorySelector from './components/CategorySelector'
     import NewsCarousel from './components/NewsCarousel'
 
@@ -38,6 +38,17 @@ import React, { useState, useEffect } from 'react'
       const [currentCategory, setCurrentCategory] = useState('Formula 1')
       const [newsItems, setNewsItems] = useState([])
       const [loading, setLoading] = useState(true)
+      const categoryKeys = Object.keys(categories)
+      const categoryIndex = useRef(0)
+
+      const handleSwipe = (direction) => {
+        if (direction === 'left') {
+          categoryIndex.current = (categoryIndex.current + 1) % categoryKeys.length
+        } else if (direction === 'right') {
+          categoryIndex.current = (categoryIndex.current - 1 + categoryKeys.length) % categoryKeys.length
+        }
+        setCurrentCategory(categoryKeys[categoryIndex.current])
+      }
 
       useEffect(() => {
         const fetchNews = async () => {
@@ -66,7 +77,7 @@ import React, { useState, useEffect } from 'react'
           </div>
           <div className="max-w-md mx-auto h-screen flex flex-col">
             <CategorySelector 
-              categories={Object.keys(categories)} 
+              categories={categoryKeys} 
               currentCategory={currentCategory}
               onChange={setCurrentCategory}
             />
@@ -74,6 +85,7 @@ import React, { useState, useEffect } from 'react'
               items={newsItems} 
               loading={loading} 
               interval={10000}
+              onSwipe={handleSwipe}
             />
           </div>
         </div>
