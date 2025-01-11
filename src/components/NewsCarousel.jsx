@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
     import NewsItem from './NewsItem'
 
-    export default function NewsCarousel({ items, loading, interval, onSwipe }) {
+    export default function NewsCarousel({ items, loading, interval, onSwipe, onArticleChange }) {
       const [currentIndex, setCurrentIndex] = useState(0)
       const touchStartX = useRef(0)
       const touchStartY = useRef(0)
@@ -21,19 +21,27 @@ import React, { useState, useEffect, useRef } from 'react'
           if (deltaX > 50) onSwipe('right')
           if (deltaX < -50) onSwipe('left')
         } else {
-          if (deltaY > 50) setCurrentIndex((prev) => Math.max(prev - 1, 0))
-          if (deltaY < -50) setCurrentIndex((prev) => Math.min(prev + 1, items.length - 1))
+          if (deltaY > 50) {
+            setCurrentIndex((prev) => Math.max(prev - 1, 0))
+            onArticleChange(items[Math.max(currentIndex - 1, 0)]?.enclosure?.url)
+          }
+          if (deltaY < -50) {
+            setCurrentIndex((prev) => Math.min(prev + 1, items.length - 1))
+            onArticleChange(items[Math.min(currentIndex + 1, items.length - 1)]?.enclosure?.url)
+          }
         }
       }
 
       useEffect(() => {
         if (items.length > 1) {
           const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % items.length)
+            const nextIndex = (currentIndex + 1) % items.length
+            setCurrentIndex(nextIndex)
+            onArticleChange(items[nextIndex]?.enclosure?.url)
           }, interval)
           return () => clearInterval(timer)
         }
-      }, [items, interval])
+      }, [items, interval, currentIndex, onArticleChange])
 
       if (loading) {
         return (
@@ -66,7 +74,10 @@ import React, { useState, useEffect, useRef } from 'react'
             {items.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => {
+                  setCurrentIndex(index)
+                  onArticleChange(items[index]?.enclosure?.url)
+                }}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex ? 'bg-white' : 'bg-white/50'
                 }`}

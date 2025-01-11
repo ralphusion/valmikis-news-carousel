@@ -38,6 +38,7 @@ import React, { useState, useEffect, useRef } from 'react'
       const [currentCategory, setCurrentCategory] = useState('Formula 1')
       const [newsItems, setNewsItems] = useState([])
       const [loading, setLoading] = useState(true)
+      const [currentImage, setCurrentImage] = useState('')
       const categoryKeys = Object.keys(categories)
       const categoryIndex = useRef(0)
 
@@ -56,6 +57,9 @@ import React, { useState, useEffect, useRef } from 'react'
           try {
             const items = await parseRSS(categories[currentCategory])
             setNewsItems(items.slice(0, 20))
+            if (items[0]?.enclosure?.url) {
+              setCurrentImage(items[0].enclosure.url)
+            }
           } catch (error) {
             console.error('Error fetching news:', error)
             setNewsItems([])
@@ -65,13 +69,17 @@ import React, { useState, useEffect, useRef } from 'react'
         fetchNews()
       }, [currentCategory])
 
+      const handleArticleChange = (imageUrl) => {
+        setCurrentImage(imageUrl)
+      }
+
       return (
         <div className="min-h-screen">
           <div className="fixed inset-0 -z-10">
-            {newsItems[0]?.enclosure?.url && (
+            {currentImage && (
               <div
                 className="w-full h-full bg-cover bg-center animate-zoom-in"
-                style={{ backgroundImage: `url(${newsItems[0]?.enclosure?.url})` }}
+                style={{ backgroundImage: `url(${currentImage})` }}
               />
             )}
           </div>
@@ -86,6 +94,7 @@ import React, { useState, useEffect, useRef } from 'react'
               loading={loading} 
               interval={10000}
               onSwipe={handleSwipe}
+              onArticleChange={handleArticleChange}
             />
           </div>
         </div>
