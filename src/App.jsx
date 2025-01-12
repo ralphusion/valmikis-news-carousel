@@ -4,9 +4,9 @@ import NewsCarousel from './components/NewsCarousel'
 
 const categories = {
   'Formula 1': 'https://www.motorsport.com/rss/f1/news/',
-  'Local': 'https://www.thehindu.com/news/national/feeder/default.rss',
+  'Latest': 'https://www.thehindu.com/news/national/feeder/default.rss',
   'Sports': 'https://www.espncricinfo.com/rss/content/story/feeds/6.xml',
-  'Finance': 'https://www.livemint.com/rss/companies',
+  'Business': 'https://www.livemint.com/rss/companies',
   'Lifestyle': 'https://www.indiatoday.in/rss/1206577',
   'AI': 'https://www.livemint.com/rss/AI'
 }
