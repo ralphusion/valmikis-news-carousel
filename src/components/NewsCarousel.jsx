@@ -6,7 +6,6 @@ const NewsCarousel = forwardRef(({ items, loading, interval, onSwipe, onArticleC
   const touchStartX = useRef(0)
   const touchStartY = useRef(0)
 
-  // Expose reset function to parent
   useImperativeHandle(ref, () => ({
     resetToFirstArticle: () => {
       setCurrentIndex(0)
@@ -15,6 +14,26 @@ const NewsCarousel = forwardRef(({ items, loading, interval, onSwipe, onArticleC
       }
     }
   }))
+
+  const handleKeyDown = (e) => {
+    switch(e.key) {
+      case 'ArrowUp':
+        setCurrentIndex(prev => Math.max(prev - 1, 0))
+        onArticleChange(items[Math.max(currentIndex - 1, 0)]?.enclosure?.url)
+        break
+      case 'ArrowDown':
+        setCurrentIndex(prev => Math.min(prev + 1, items.length - 1))
+        onArticleChange(items[Math.min(currentIndex + 1, items.length - 1)]?.enclosure?.url)
+        break
+      default:
+        break
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [currentIndex, items])
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX
