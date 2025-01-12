@@ -103,7 +103,13 @@ function App() {
           <>
             <div
               className="w-full h-full bg-cover bg-center animate-zoom-in"
-              style={{ backgroundImage: `url(${currentImage})` }}
+              style={{ 
+                backgroundImage: `url(${currentImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                objectFit: 'cover'
+              }}
             />
             <div className="absolute inset-0 bg-black/50" />
           </>
