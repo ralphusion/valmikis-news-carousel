@@ -10,6 +10,9 @@ export default function NewsItem({ item = {} }) {
     minute: '2-digit'
   })
 
+  // Extract source from link
+  const source = item.link ? new URL(item.link).hostname.replace('www.', '') : 'Unknown'
+
   const cleanContent = (content) => {
     if (!content) return 'No content available...'
     const cleaned = content
@@ -20,9 +23,9 @@ export default function NewsItem({ item = {} }) {
   }
 
   return (
-    <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 h-[80%] flex flex-col justify-between">
+    <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 flex flex-col space-y-4 h-[80vh]">
       <div>
-        <h1 className="text-3xl font-bold mb-2 leading-tight text-white">
+        <h1 className="text-3xl font-bold mb-1 leading-tight text-white">
           {item.title}
         </h1>
         <p className="text-sm text-white/80 mb-4">{formattedDate}</p>
@@ -30,15 +33,15 @@ export default function NewsItem({ item = {} }) {
           {cleanContent(item.contentSnippet)}
         </p>
       </div>
-      <div>
+      <div className="mt-auto">
         {item.link && (
           <a
             href={item.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block w-full text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+            className="text-purple-400 hover:text-purple-300 underline text-lg transition-colors"
           >
-            Read More
+            Continue on {source} →
           </a>
         )}
       </div>

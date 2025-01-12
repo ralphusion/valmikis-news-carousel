@@ -109,22 +109,24 @@ function App() {
           </>
         )}
       </div>
-      <div className="max-w-4xl mx-auto h-screen flex flex-col p-4">
-        <div className="w-full">
+      <div className="max-w-4xl mx-auto h-screen flex flex-col p-4 space-y-6">
+        <div className="w-full pt-6">
           <CategorySelector 
             categories={categoryKeys} 
             currentCategory={currentCategory}
             onChange={setCurrentCategory}
           />
         </div>
-        <NewsCarousel 
-          ref={carouselRef}
-          items={newsItems} 
-          loading={loading} 
-          interval={10000}
-          onSwipe={handleSwipe}
-          onArticleChange={handleArticleChange}
-        />
+        <div className="flex-1">
+          <NewsCarousel 
+            ref={carouselRef}
+            items={newsItems} 
+            loading={loading} 
+            interval={10000}
+            onSwipe={handleSwipe}
+            onArticleChange={handleArticleChange}
+          />
+        </div>
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ const NewsCarousel = forwardRef(({ items, loading, interval, onSwipe, onArticleC
   const [currentIndex, setCurrentIndex] = useState(0)
   const touchStartX = useRef(0)
   const touchStartY = useRef(0)
+  const containerRef = useRef(null)
 
   useImperativeHandle(ref, () => ({
     resetToFirstArticle: () => {
@@ -86,15 +87,23 @@ const NewsCarousel = forwardRef(({ items, loading, interval, onSwipe, onArticleC
 
   return (
     <div 
-      className="flex-1 relative overflow-hidden"
+      className="flex-1 relative h-[calc(100vh-200px)] overflow-y-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      ref={containerRef}
     >
       <div className="absolute inset-0 transition-transform duration-500"
         style={{ transform: `translateY(-${currentIndex * 100}%)` }}
       >
         {items.map((item, index) => (
-          <div key={index} className="h-full p-4">
+          <div 
+            key={index} 
+            className="h-[calc(100vh-200px)] absolute top-0 left-0 right-0"
+            style={{ 
+              transform: `translateY(${index * 100}%)`,
+              visibility: index === currentIndex ? 'visible' : 'hidden'
+            }}
+          >
             <NewsItem item={item} />
           </div>
         ))}
